@@ -80,7 +80,7 @@ public class controlador extends HttpServlet {
          try {
          DAO1 daba=new DAO1();
          int idEmpleado = Integer.parseInt(request.getParameter("numEmp"));
-         int sueldo = Integer.parseInt(request.getParameter("sueldo"));
+         int sueldo = Integer.parseInt(request.getParameter("Sueldo"));
          reporte obj=new reporte(idEmpleado, sueldo);
          daba.Actualizar(obj);
          response.sendRedirect("controlador");
