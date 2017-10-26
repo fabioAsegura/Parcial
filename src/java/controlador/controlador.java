@@ -5,7 +5,7 @@
  */
 package controlador;
 
-import dao.DAO;
+import DAO.DAO1;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -78,11 +78,11 @@ public class controlador extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          try {
-         DAO dao=new DAO();
+         DAO1 daba=new DAO1();
          int idEmpleado = Integer.parseInt(request.getParameter("numEmp"));
          int sueldo = Integer.parseInt(request.getParameter("sueldo"));
          reporte obj=new reporte(idEmpleado, sueldo);
-         dao.capturar(obj);
+         daba.Actualizar(obj);
          response.sendRedirect("controlador");
 
         } catch (SQLException ex) {

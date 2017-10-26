@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,15 +12,15 @@ import util.Dbutil;
 
 
 
-public class DAO {
+public class DAO1 {
 
     private static Connection connection;
 
-    public DAO() throws SQLException {
+    public DAO1() throws SQLException {
         connection = Dbutil.getConnection();
     }
 
-    public boolean capturar(reporte obj) throws SQLException {
+    public boolean Actualizar(reporte obj) throws SQLException {
         boolean result = false;
         Connection connection = Dbutil.getConnection();
         String query = "update empleado set sueldo=?" +"where idEmpleado=?";
