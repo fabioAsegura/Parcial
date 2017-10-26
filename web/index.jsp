@@ -8,6 +8,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+    <div class="col-sm-12 text-left">
   <form class="col-sm-2" action="controlador" method="POST">
   <div class="form-group">
     <label for="usuario">numero de empleado</label>
@@ -18,8 +19,12 @@
     <input type="text" class="form-control" name="Sueldo">
   </div>
    
-  <button type="submit" class="btn btn-primary">Actualizar sueldo</button>
+  <button type="submit" class="btn-sm btn-primary">Actualizar sueldo</button>
+  <div class="span12">&nbsp;</div>
+  <button onclick="window.location.href='reporte.jsp'" type="button" class="btn-sm btn-primary">Reportes</button>
 </form>
+       
+  </div>
     </body>
 </html>
 
