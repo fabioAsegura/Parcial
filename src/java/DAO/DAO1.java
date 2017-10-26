@@ -20,21 +20,20 @@ public class DAO1 {
         connection = Dbutil.getConnection();
     }
 
-    public boolean Actualizar(reporte obj) throws SQLException {
-        boolean result = false;
+    public void Actualizar(reporte obj) throws SQLException {
         Connection connection = Dbutil.getConnection();
-        String query = "update empleado set sueldo=?" +"where idEmpleado=?";
-       
-        PreparedStatement preparedStmt = null;
+        String query = "update empleado set sueldo=? where idEmpleado=?";
+         PreparedStatement preparedStmt =DAO1.connection.prepareStatement(query);
         try {
-            preparedStmt = connection.prepareStatement(query);
+          
+           
              preparedStmt.setInt(1, obj.getSueldo());
             preparedStmt.setInt(2, obj.getIdEmpleado());
-           
-            result = preparedStmt.execute();
+            preparedStmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
+			e.printStackTrace();
+		}
+        
     }
+ 
 }
