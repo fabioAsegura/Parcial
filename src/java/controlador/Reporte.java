@@ -5,19 +5,26 @@
  */
 package controlador;
 
+import DAO.DAO1;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.cuentas;
+import model.valores;
 
 /**
  *
  * @author User
  */
 public class Reporte extends HttpServlet {
-
+int idEmpleado;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -56,7 +63,29 @@ public class Reporte extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        try {
+            DAO1 dab = new DAO1();
+            cuentas cu=new cuentas();
+            int sueldo=dab.getSueldoById(idEmpleado);
+            int dias=dab.getDiasById(idEmpleado);
+           
+ ArrayList<valores> lista=new ArrayList<valores>();
+ valores obj=new valores(sueldo, cu.salarioMinimo(sueldo), cu.Transporte(cu.salarioMinimo(sueldo)), cu.Prima(sueldo, dias), cu.cesantias(sueldo, dias), cu.InterecesCesantias(cu.cesantias(sueldo, dias)), cu.vacaciones(sueldo, dias));
+           lista.add(obj);
+            
+            ArrayList<valores> listas = (ArrayList<valores>) lista;
+            request.setAttribute("listaEsquemas", listas);
+            
+           request.getRequestDispatcher("reporte.jsp").forward(request, response);
+            
+            
+            
+            
+            
+        } catch (SQLException ex) {
+        Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**
@@ -70,7 +99,19 @@ public class Reporte extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            DAO1 dab=new DAO1();
+            
+            idEmpleado = Integer.parseInt(request.getParameter("numEmp"));
+            
+            
+         response.sendRedirect("Reporte");
+        } catch (SQLException ex) {
+            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+       
+        
     }
 
     /**

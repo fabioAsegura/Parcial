@@ -1,5 +1,6 @@
 package DAO;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,5 +36,41 @@ public class DAO1 {
 		}
         
     }
+    public int getSueldoById(int userId) {
+		int sueldo=0;
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select sueldo from empleado where idEmpleado=?");
+			preparedStatement.setInt(1, userId);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			if (rs.next()) {
+				sueldo=rs.getInt("sueldo");
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return sueldo;
+	}
+        public int getDiasById(int userId) {
+		int Dias=0;
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select DiasTrabajado from sueldo where idEmpleado=?");
+			preparedStatement.setInt(1, userId);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			if (rs.next()) {
+				Dias=rs.getInt("DiasTrabajado");
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return Dias;
+	}
  
 }

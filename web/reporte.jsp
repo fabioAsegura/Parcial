@@ -1,3 +1,5 @@
+<%@page import="model.valores"%>
+<%@page import="java.util.ArrayList"%>
 <html>
     <head>
         <title>Principal</title>
@@ -8,7 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <form class="col-sm-2" action="controlador" method="POST">
+        <form class="col-sm-2" action="Reporte" method="POST">
   <div class="form-group">
     <label for="usuario">numero de empleado</label>
     <input type="text" class="form-control"  name="numEmp">
@@ -19,19 +21,36 @@
  <div class="container">           
   <table class="table table-striped">
       <tr>
-        <th>Nombre</th>
-        <th>Sueldo basico</th>
-        <th>Salario minimo</th>
-        <th>Auxilio de transporte</th>
-        <th>Prima de servicios</th>
-        <th>Cesantias</th>
-        <th>Intereses sobre cesantias</th>
-         <th>vacaciones</th>
-         <th>Salus</th>
-         <th>Pension</th>
-         <th>Parafiscales</th>
+        <td>Sueldo basico</td>
+        <td>Salario minimo</td>
+        <td>Auxilio de transporte</td>
+        <td>Prima de servicios</td>
+        <td>Cesantias</td>
+        <td>Intereses sobre cesantias</td>
+         <td>vacaciones</td>
       </tr>
-      <tr></tr>
+      <% 
+                        
+                        if (request.getAttribute("listaEsquemas") != null) {
+                        ArrayList<valores> list = (ArrayList<valores>) request.getAttribute("listaEsquemas");
+                        if(list!= null)
+                            for (valores valor : list) {
+
+
+                        %>
+                        <tr>
+                            <td><%=valor.getSueldo()%></td>
+                            <td><%=valor.getSalarioMinimo()%></td>
+                            <td><%=valor.getTransporte()%></td>
+                            <td><%=valor.getPrima()%></td>
+                            <td><%=valor.getCesantias()%></td>
+                             <td><%=valor.getInterecesCesantias()%></td>
+                             <td><%=valor.getVacaciones()%></td>
+                            
+                        </tr>
+                        <% } 
+                        }
+                        %>
   </table>
 </div>
     </body>
